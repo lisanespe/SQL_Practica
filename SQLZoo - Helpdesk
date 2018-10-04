@@ -1,0 +1,70 @@
+https://sqlzoo.net/wiki/Help_Desk
+
+Easy
+
+1
+
+SELECT call_date, call_ref FROM Issue
+WHERE Detail LIKE '%index%' AND Detail LIKE '%Oracle%';
+
+2
+SELECT call_date, first_name, last_name FROM Issue INNER JOIN Caller 
+WHERE first_name = 'Samantha' AND last_name = 'Hall' AND DATE(call_date) = '2017-08-14';
+
+3
+SELECT status, COUNT(*) AS Volume FROM Issue
+GROUP BY Status
+
+4
+SELECT COUNT(*) AS mlcc 
+FROM Issue
+JOIN Staff ON Issue.Assigned_to = Staff.Staff_code
+JOIN Level ON Level.Level_code=Staff.Level_code
+WHERE Manager = 'Y' 
+
+5
+SELECT Shift_date, Shift_type, first_name, last_name 
+FROM Shift
+JOIN Staff ON Shift.Manager = Staff.Staff_code
+
+Medium
+
+6 
+
+SELECT Company_name, COUNT(call_ref) AS CC FROM Customer
+JOIN Caller ON Customer.Company_ref = Caller.Company_ref
+JOIN Issue ON Caller.Caller_id = Issue.Caller_id
+GROUP BY Company_name
+HAVING COUNT(call_ref)>17
+
+7
+ 
+SELECT first_name, last_name FROM Caller
+LEFT JOIN Issue ON Caller.Caller_id = Issue.Caller_id
+WHERE Issue.Caller_id IS NULL
+
+8 
+
+SELECT Company_name, first_name, last_name, COUNT(call_ref) AS nc FROM Caller
+JOIN Customer ON Customer.Company_ref = Caller.Company_ref
+JOIN Issue ON Caller.Caller_id = Issue.Caller_id
+GROUP BY Company_name, first_name, last_name
+HAVING COUNT(call_ref)<5
+
+9 -
+SELECT shift_date, shift_type, Manager FROM Shift
+UNION
+SELECT shift_date, shift_type, Operator FROM Shift
+UNION
+SELECT shift_date, shift_type, Engineer1 FROM Shift
+UNION
+SELECT shift_date, shift_type, Engineer2 FROM Shift
+
+10 
+
+SELECT Staff.first_name, Staff.last_name, Issue.Call_date FROM Staff
+JOIN Issue ON Staff_code=Taken_by
+JOIN Caller on Caller.Caller_id = Issue.Caller_id
+WHERE Caller.first_name = 'Harry' AND Issue.Call_date = (SELECT MAX(Issue.Call_date) FROM Issue
+                                                         WHERE Caller.first_name = 'Harry')  
+
