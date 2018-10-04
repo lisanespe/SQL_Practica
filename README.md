@@ -1,9 +1,7 @@
-# SQL_Practica
+## Ejercicios Helpdesk f√°ciles e intermedios y UML
 
-Ejercicios Helpdesk f·ciles e intermedios y UML:
+sqlzoo.netwikiHelp_Desk
 
-sqlzoo.net/wiki/Help_Desk
+## Ejercicios sobre Nested Join
 
-Ejercicios sobre Nested Join:
-
-sqlzoo.net/wiki/SELECT_within_SELECT_Tutorial	
+sqlzoo.netwikiSELECT_within_SELECT_Tutorial	
